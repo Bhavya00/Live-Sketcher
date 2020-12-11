@@ -1,0 +1,32 @@
+import cv2
+import numpy as np
+
+# Sketch generating function
+def sketch(image):
+    # Converting image into gray scale
+    img_gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    
+    # Clean up image using Guassian Blur
+    img_blur=cv2.GaussianBlur(img_gray,(7,7),0)
+    
+    # Extracting Edges
+    img_edge=cv2.Canny(img_blur,10,80)
+    
+    # Invert binarization
+    ret,mask=cv2.threshold(img_edge,60,255,cv2.THRESH_BINARY_INV)
+    return mask
+
+# Initialise webcam , cap is object provided by VideoCapturer
+# It is a boolean indicating if it was successful(ret)
+# It also contains the images collected from the webcam(frame)
+cap=cv2.VideoCapture(-1)
+
+while True:
+    ret,frame=cap.read()
+    cv2.imshow("Live Sketcher",sketch(frame))
+    if cv2.waitKey(1)==13: # 13 is the enter key
+        break
+
+# release camera and window
+cap.release()
+cv2.destroyAllWindows()
