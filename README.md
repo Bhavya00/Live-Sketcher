@@ -1,7 +1,7 @@
 # Live-Sketcher
 This is a simple application of OpenCV
 
-##Live Sketch Algorithm OpenCV:
+**Live Sketch Algorithm OpenCV:
 
 1. Capturing Real-time Video from the source example – computer’s camera
 2. Reading each frame of the video, so that we can make manipulations on the frame.
